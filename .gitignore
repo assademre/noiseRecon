@@ -1,0 +1,15 @@
+# Build directories
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+/Makefile
+/cmake_install.cmake
+*.o
+*.a
+*.so
+*.exe
+*.out
+
+# User-specific files
+*.user
+*.swp
