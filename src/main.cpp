@@ -15,6 +15,8 @@ int main() {
 
     std::cout << "Sensor reading started...\n";
     for (double v : measurements) std::cout << v << '\n';
+
+    field.printVisualization();
     
     return 1;
 }

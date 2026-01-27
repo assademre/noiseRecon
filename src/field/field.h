@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <cmath>
+#include <iostream>
 
 class Field2D {
     public:
@@ -11,6 +12,8 @@ class Field2D {
 
         int width() const {return width_;}
         int height() const {return height_;}
+
+        void printVisualization() const;
 
 private:
     int width_, height_;

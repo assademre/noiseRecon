@@ -19,3 +19,14 @@ void Field2D::addBubble(int cx, int cy, int r) {
 double Field2D::at(int x, int y) const {
     return data_[y*width_ + x];
 }
+
+void Field2D::printVisualization() const {
+    for (int y = 0; y < height_; ++y) {
+        for (int x=0; x < width_; ++x) {
+            double v = at(x, y);
+            if (v > 0.5) std::cout << "1";
+            else std::cout << "0";
+        }
+        std::cout << '\n';
+    }
+}
