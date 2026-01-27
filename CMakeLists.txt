@@ -8,6 +8,7 @@ add_executable(noiseReckon
     src/main.cpp
     src/field/field.cpp
     src/forward/projection.cpp
+    src/noise/noiseModel.cpp
 )
 
 target_include_directories(noiseReckon PRIVATE src)

@@ -24,8 +24,8 @@ void Field2D::printVisualization() const {
     for (int y = 0; y < height_; ++y) {
         for (int x=0; x < width_; ++x) {
             double v = at(x, y);
-            if (v > 0.5) std::cout << "1";
-            else std::cout << "0";
+            if (v > 0.5) std::cout << "O";
+            else std::cout << "*";
         }
         std::cout << '\n';
     }
