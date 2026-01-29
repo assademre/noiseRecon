@@ -2,11 +2,14 @@
 #include "field/field.h"
 #include "forward/projection.h"
 #include "noise/noiseModel.h"
+#include "reconstruction/reconstructor.h"
+
 
 constexpr int WIDTH = 32;
 constexpr int HEIGHT = 32;
 constexpr int TOTAL_SENSOR = 5;
 constexpr double NOISE_VARIABLE = 5.0;
+constexpr int TOTAL_ITERATIONS = 10000;
 
 int main() {
     Field2D field(WIDTH, HEIGHT);
@@ -31,6 +34,16 @@ int main() {
 
 
     for (double v : measurements) std::cout << v << '\n';
+
+
+    // reconstrution test
+    Field2D newField(WIDTH, HEIGHT);
+    Reconstructor reconstruct(TOTAL_ITERATIONS, 0.5);
+
+    reconstruct.reconstruct(newField, proj, measurements);
+
+    std::cout << "\n Reconstrutered field with ghost blob: \n";
+    newField.printVisualization();
     
     return 1;
 }

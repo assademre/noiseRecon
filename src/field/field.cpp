@@ -20,6 +20,11 @@ double Field2D::at(int x, int y) const {
     return data_[y*width_ + x];
 }
 
+void Field2D::set(int x, int y, double value)
+{
+    data_[y * width_ + x] = value;
+}
+
 void Field2D::printVisualization() const {
     for (int y = 0; y < height_; ++y) {
         for (int x=0; x < width_; ++x) {

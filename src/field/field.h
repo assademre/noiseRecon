@@ -9,11 +9,13 @@ class Field2D {
 
         void addBubble(int cx, int cy, int r);
         double at(int x, int y) const;
+        void set(int x, int y, double value);
 
         int width() const {return width_;}
         int height() const {return height_;}
 
         void printVisualization() const;
+
 
 private:
     int width_, height_;
