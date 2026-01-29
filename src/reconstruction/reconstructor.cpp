@@ -10,7 +10,7 @@ Reconstructor::Reconstructor(int iterations, double step) : iterations_(iteratio
 
 double Reconstructor::computeError(const std::vector<double>& a, const std::vector<double>& b) {
     double error;
-    for (size_t i=0; i<a.size(); ++i) error = std::pow(a[i] - b[i], 2);
+    for (size_t i=0; i<a.size(); ++i) error += std::pow(a[i] - b[i], 2);
     return error;
 }
 
