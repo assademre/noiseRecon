@@ -7,9 +7,9 @@
 
 constexpr int WIDTH = 32;
 constexpr int HEIGHT = 32;
-constexpr int TOTAL_SENSOR = 5;
+constexpr int TOTAL_SENSOR = 100;
 constexpr double NOISE_VARIABLE = 5.0;
-constexpr int TOTAL_ITERATIONS = 10000;
+constexpr int TOTAL_ITERATIONS = 1000;
 
 int main() {
     Field2D field(WIDTH, HEIGHT);
@@ -21,7 +21,7 @@ int main() {
     auto measurements = proj.measure(field);
 
 
-    field.printVisualization();
+    // field.printVisualization();
     std::cout << "Sensor reading without noise started...\n";
     
     for (double v : measurements) std::cout << v << '\n';
@@ -45,5 +45,5 @@ int main() {
     std::cout << "\n Reconstrutered field with ghost blob: \n";
     newField.printVisualization();
     
-    return 1;
+    return 0;
 }
