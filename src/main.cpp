@@ -3,6 +3,7 @@
 #include "forward/projection.h"
 #include "noise/noiseModel.h"
 #include "reconstruction/reconstructor.h"
+#include "visualize/visualizer.h"
 
 
 constexpr int WIDTH = 32;
@@ -22,6 +23,7 @@ int main() {
 
 
     // field.printVisualization();
+    Visualizer::saveFieldPPM(field, "Buble_map.ppm");
     std::cout << "Sensor reading without noise started...\n";
     
     for (double v : measurements) std::cout << v << '\n';
@@ -44,6 +46,8 @@ int main() {
 
     std::cout << "\n Reconstrutered field with ghost blob: \n";
     newField.printVisualization();
+    
+    Visualizer::saveFieldPPM(newField, "reconstructed_map.ppm");
     
     return 0;
 }

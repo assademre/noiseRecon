@@ -10,7 +10,7 @@ add_executable(noiseReckon
     src/forward/projection.cpp
     src/noise/noiseModel.cpp
     src/reconstruction/reconstructor.cpp
+    src/visualize/visualizer.cpp
 )
 
 target_include_directories(noiseReckon PRIVATE src)
-
