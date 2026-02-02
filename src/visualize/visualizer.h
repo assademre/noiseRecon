@@ -7,6 +7,7 @@
 class Visualizer {
     public:
         static void saveFieldPPM(const Field2D& field, const std::string& filename);
+        static void saveComparison(const Field2D& field, const Field2D& field2, const std::string& filename);
 
     private:
         static void valueToRGB(double value, unsigned char& r, unsigned char& g, unsigned char& b);

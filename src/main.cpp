@@ -46,6 +46,9 @@ int main() {
     std::cout << "\n Reconstrutered field with ghost blob: \n";
     
     Visualizer::saveFieldPPM(newField, "reconstructed_map.ppm");
+
+    Visualizer::saveComparison(field, newField, "comparison.ppm");
+    std::cout << "Comparison saved\n";
     
     return 0;
 }
