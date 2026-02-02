@@ -22,7 +22,6 @@ int main() {
     auto measurements = proj.measure(field);
 
 
-    // field.printVisualization();
     Visualizer::saveFieldPPM(field, "Buble_map.ppm");
     std::cout << "Sensor reading without noise started...\n";
     
@@ -45,7 +44,6 @@ int main() {
     reconstruct.reconstruct(newField, proj, measurements);
 
     std::cout << "\n Reconstrutered field with ghost blob: \n";
-    newField.printVisualization();
     
     Visualizer::saveFieldPPM(newField, "reconstructed_map.ppm");
     
