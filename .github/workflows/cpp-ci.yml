@@ -1,8 +1,8 @@
-name: C++ CMake CI
+name: C++ Build & Test
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "feature/*", "master" ]
   pull_request:
     branches: [ "master" ]
 
@@ -21,3 +21,8 @@ jobs:
 
     - name: Build
       run: cmake --build build
+
+    - name: Run tests
+      run: |
+        cd build
+        ctest --output-on-failure
