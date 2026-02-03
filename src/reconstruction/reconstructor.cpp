@@ -6,7 +6,7 @@
 
 constexpr int ERROR_DISPLAY_FREQUENCY{100};
 
-Reconstructor::Reconstructor(int iterations, double step) : iterations_(iterations), step_(step) {}
+Reconstructor::Reconstructor(int iterations) : iterations_(iterations){}
 
 double Reconstructor::computeError(const std::vector<double>& a, const std::vector<double>& b) {
     double error{0.0};
