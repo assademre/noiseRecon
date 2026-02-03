@@ -5,12 +5,11 @@
 
 class Reconstructor {
     public:
-        Reconstructor(int itereations, double step);
+        Reconstructor(int itereations);
 
         void reconstruct(Field2D& field, const Projection& projection, const std::vector<double>& measurement);
 
     private:
         int iterations_;
-        double step_;
         double computeError(const std::vector<double>& a, const std::vector<double>& b);
 };

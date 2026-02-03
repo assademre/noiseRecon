@@ -11,6 +11,7 @@ add_executable(noiseReckon
     src/noise/noiseModel.cpp
     src/reconstruction/reconstructor.cpp
     src/visualize/visualizer.cpp
+    src/experiments/experimentRunner.cpp
 )
 
 target_include_directories(noiseReckon PRIVATE src)
