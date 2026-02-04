@@ -3,16 +3,16 @@
 
 constexpr int WIDTH = 32;
 constexpr int HEIGHT = 32;
-constexpr int TOTAL_SENSOR = 100;
-constexpr double NOISE_VARIABLE = 5.0;
 constexpr int TOTAL_ITERATIONS = 1000;
 
 int main() {
-    ExperimentRunner::runSingleExperiment(
+    std::vector<int> sensors = {5, 25, 50, 100};
+    std::vector<double> noises = {0.5, 1.0, 5.0, 10.0};
+    ExperimentRunner::runMultipleExperiments(
         WIDTH,
         HEIGHT,
-        TOTAL_SENSOR,
-        NOISE_VARIABLE,
+        sensors,
+        noises,
         TOTAL_ITERATIONS
     );
 

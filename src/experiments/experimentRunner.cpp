@@ -34,3 +34,20 @@ void ExperimentRunner::runSingleExperiment(int width, int height, int numSensors
 
     std::cout << "Files saved \n"; 
  }
+
+ void ExperimentRunner::runMultipleExperiments(int width, int height, std::vector<int>& sensorRange, std::vector<double>& noiseRange, int iterations) {
+    int experimentNumber = 1;
+
+    for (int sensor : sensorRange) {
+        for(double noise : noiseRange) {
+            std::string outputPref = "experiment_" + std::to_string(experimentNumber) + "_sensors_" + std::to_string(sensor) + "_noise_" +
+            std::to_string(static_cast<int>(noise));
+
+            runSingleExperiment(width, height, sensor, noise, iterations, outputPref);
+
+            experimentNumber++;
+        }
+    }
+
+    std::cout << "Experiments completed\n";
+ }

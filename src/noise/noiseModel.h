@@ -1,11 +1,12 @@
 #pragma once
 #include <vector>
 #include <random>
+#include <stdexcept>
 
 class NoiseModel {
     public:
         explicit NoiseModel(double sigma);
-        void apply(std::vector<double>& vector);
+        void apply(std::vector<double>& values);
 
     private:
         std::mt19937 rng_;
