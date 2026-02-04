@@ -9,6 +9,7 @@
 *.so
 *.exe
 *.out
+*.bat
 
 # User-specific files
 *.user
