@@ -4,10 +4,21 @@
 #include <random>
 #include <iostream>
 
-constexpr int ERROR_DISPLAY_FREQUENCY = 100;
-constexpr double LAMBDA = 0.1;
-
 Reconstructor::Reconstructor(int iterations) : iterations_(iterations){}
+
+void Reconstructor::flipBlock(Field2D& field, int cx, int cy, int blockSize, std::mt19937& rng) {
+    for (int dy = -blockSize/2; dy<=blockSize/2; ++dy) {
+        for (int dx = -blockSize/2; dx<=blockSize/2; ++dx) {
+            int x = cx + dx;
+            int y = cy + dy;
+            
+            if (x >= 0 && x < field.width() && y >= 0 && y < field.height()) {
+                double val = field.at(x, y);
+                field.set(x, y, 1-val);
+            }
+        }
+    }
+}
 
 double Reconstructor::computeError(const std::vector<double>& a, const std::vector<double>& b) {
     double error{0.0};
@@ -52,11 +63,10 @@ void Reconstructor::reconstruct(Field2D &field, const Projection &projection, co
     double bestError = measurementError + (LAMBDA * smoothnessError);
 
     for (int iter=0; iter<iterations_; ++iter) {
-        int x = xDist(rng);
-        int y = yDist(rng);
+        int cx = xDist(rng);
+        int cy = yDist(rng);
 
-        double real = field.at(x, y);
-        field.set(x, y, 1.0 - real);
+        flipBlock(field, cx, cy, BLOCK_SIZE, rng);
 
         double newMeasurementError = computeError(projection.measure(field), measurement);
         double newSmoothnessError = computeSmoothnessError(field);
@@ -65,7 +75,7 @@ void Reconstructor::reconstruct(Field2D &field, const Projection &projection, co
         if (newError < bestError) {
             bestError = newError;
         } else {
-            field.set(x, y, real);
+            flipBlock(field, cx, cy, BLOCK_SIZE, rng);
         }
 
         if (iter % ERROR_DISPLAY_FREQUENCY == 0) std::cout << "Iteration: " << iter << " error: " << bestError << '\n';
