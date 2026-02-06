@@ -13,3 +13,6 @@ inline std::vector<double> noises = {0.1};
 constexpr int ERROR_DISPLAY_FREQUENCY = 20;
 constexpr double LAMBDA = 0.2;
 constexpr int BLOCK_SIZE = 13;
+
+//projection
+constexpr double PI = 3.1415;
