@@ -9,7 +9,10 @@
 
 class ExperimentRunner {
     public:
-        static void runSingleExperiment(int width, int height, int numSensors, double noiseLevel, int iterations, const std::string& outputPref=
-        "results");
-        static void runMultipleExperiments(int width, int height, std::vector<int>& sensorRange, std::vector<double>& noiseRange, int iterations);
+        static void runSingleExperiment(int width, int height, int numSensors,
+                                        double noiseLevel, int iterations, 
+                                        const std::string& outputPref= "results", SensorType sensorType = SensorType::RANDOM);
+        static void runMultipleExperiments(int width, int height, std::vector<int>& sensorRange,
+                                        std::vector<double>& noiseRange, int iterations,
+                                        SensorType sensorType = SensorType::RANDOM);
 };

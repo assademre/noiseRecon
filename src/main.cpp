@@ -1,5 +1,6 @@
 #include <iostream>
 #include "experiments/experimentRunner.h"
+#include "forward/projection.h"
 #include "config.h"
 
 
@@ -9,7 +10,8 @@ int main() {
         HEIGHT,
         sensors,
         noises,
-        TOTAL_ITERATIONS
+        TOTAL_ITERATIONS,
+        SensorType::LOCALIZED
     );
 
     return 0;
