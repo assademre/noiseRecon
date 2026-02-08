@@ -50,7 +50,7 @@ void ExperimentRunner::runSingleExperiment(int width, int height,
         for (double noise : noiseRange) {
             for (double lambda : lambdas) {
                 for (int blockSize : blockSizes) {
-                    std::string outputPref = "_s" + std::to_string(sensor) +
+                    std::string outputPref = outputPrefix + "_s" + std::to_string(sensor) +
                                              "_n" + std::to_string(static_cast<int>(noise*100)) +
                                              "_l" + std::to_string(static_cast<int>(lambda*100)) +
                                              "_b" + std::to_string(blockSize);                                        

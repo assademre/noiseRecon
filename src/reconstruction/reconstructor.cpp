@@ -61,22 +61,22 @@ void Reconstructor::reconstruct(Field2D &field, const Projection &projection, co
     
     double measurementError = computeError(projection.measure(field), measurement);
     double smoothnessError = computeSmoothnessError(field);
-    double bestError = measurementError + (LAMBDA * smoothnessError);
+    double bestError = measurementError + (lambda_ * smoothnessError);
 
     for (int iter=0; iter<iterations_; ++iter) {
         int cx = xDist(rng);
         int cy = yDist(rng);
 
-        flipBlock(field, cx, cy, BLOCK_SIZE, rng);
+        flipBlock(field, cx, cy, blockSize_, rng);
 
         double newMeasurementError = computeError(projection.measure(field), measurement);
         double newSmoothnessError = computeSmoothnessError(field);
-        double newError = newMeasurementError + (LAMBDA * newSmoothnessError);
+        double newError = newMeasurementError + (lambda_ * newSmoothnessError);
 
         if (newError < bestError) {
             bestError = newError;
         } else {
-            flipBlock(field, cx, cy, BLOCK_SIZE, rng);
+            flipBlock(field, cx, cy, blockSize_, rng);
         }
 
         if (iter % ERROR_DISPLAY_FREQUENCY == 0) std::cout << "Iteration: " << iter << " error: " << bestError << '\n';

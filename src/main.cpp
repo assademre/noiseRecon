@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "config.h"
 #include "experiments/experimentRunner.h"
 #include "forward/projection.h"

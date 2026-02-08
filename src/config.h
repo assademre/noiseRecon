@@ -5,10 +5,10 @@
 //main
 constexpr int WIDTH = 64;
 constexpr int HEIGHT = 64;
-constexpr int TOTAL_ITERATIONS = 15000;
+constexpr int TOTAL_ITERATIONS = 5000;
 
-inline std::vector<int> sensors = {1}; 
-inline std::vector<double> noises = {0.1};
+inline std::vector<int> sensors = {1, 10, 20}; 
+inline std::vector<double> noises = {0.1, 0.3, 0.5};
 
 //reconstructor
 constexpr int ERROR_DISPLAY_FREQUENCY = 20;
@@ -29,4 +29,4 @@ inline std::vector<BubbleConfig> bubbles = {
 };
 
 //output prefix
-inline std::string outputPrefix = "output"
+inline std::string outputPrefix = "output";
