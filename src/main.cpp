@@ -10,6 +10,8 @@ int main() {
         HEIGHT,
         sensors,
         noises,
+        lambdas,
+        blockSizes,
         TOTAL_ITERATIONS,
         SensorType::LOCALIZED
     );

@@ -4,7 +4,8 @@
 #include <random>
 #include <iostream>
 
-Reconstructor::Reconstructor(int iterations) : iterations_(iterations){}
+Reconstructor::Reconstructor(int iterations, double lambda, int blockSize) 
+             : iterations_(iterations), lambda_(lambda), blockSize_(blockSize){}
 
 void Reconstructor::flipBlock(Field2D& field, int cx, int cy, int blockSize, std::mt19937& rng) {
     for (int dy = -blockSize/2; dy<=blockSize/2; ++dy) {

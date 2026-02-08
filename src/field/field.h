@@ -17,8 +17,8 @@ class Field2D {
         void printVisualization() const;
 
 
-private:
-    int width_, height_;
-    std::vector<double> data_;
+    private:
+        int width_, height_;
+        std::vector<double> data_;
 
 };

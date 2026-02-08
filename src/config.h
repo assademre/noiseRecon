@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 //main
 constexpr int WIDTH = 64;
@@ -11,8 +12,21 @@ inline std::vector<double> noises = {0.1};
 
 //reconstructor
 constexpr int ERROR_DISPLAY_FREQUENCY = 20;
-constexpr double LAMBDA = 0.2;
-constexpr int BLOCK_SIZE = 13;
+inline std::vector<double> lambdas = {0.2, 0.3, 0.5};
+inline std::vector<int> blockSizes = {1, 5, 7, 10};
 
 //projection
 constexpr double PI = 3.1415;
+
+//experiment runner
+struct BubbleConfig {
+    int cx, cy, radius;
+};
+
+inline std::vector<BubbleConfig> bubbles = {
+    {16, 6, 4},
+    {25, 55, 7}
+};
+
+//output prefix
+inline std::string outputPrefix = "output"
