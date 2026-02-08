@@ -4,7 +4,8 @@
 #include <random>
 #include <iostream>
 
-Reconstructor::Reconstructor(int iterations) : iterations_(iterations){}
+Reconstructor::Reconstructor(int iterations, double lambda, int blockSize) 
+             : iterations_(iterations), lambda_(lambda), blockSize_(blockSize){}
 
 void Reconstructor::flipBlock(Field2D& field, int cx, int cy, int blockSize, std::mt19937& rng) {
     for (int dy = -blockSize/2; dy<=blockSize/2; ++dy) {
@@ -60,22 +61,22 @@ void Reconstructor::reconstruct(Field2D &field, const Projection &projection, co
     
     double measurementError = computeError(projection.measure(field), measurement);
     double smoothnessError = computeSmoothnessError(field);
-    double bestError = measurementError + (LAMBDA * smoothnessError);
+    double bestError = measurementError + (lambda_ * smoothnessError);
 
     for (int iter=0; iter<iterations_; ++iter) {
         int cx = xDist(rng);
         int cy = yDist(rng);
 
-        flipBlock(field, cx, cy, BLOCK_SIZE, rng);
+        flipBlock(field, cx, cy, blockSize_, rng);
 
         double newMeasurementError = computeError(projection.measure(field), measurement);
         double newSmoothnessError = computeSmoothnessError(field);
-        double newError = newMeasurementError + (LAMBDA * newSmoothnessError);
+        double newError = newMeasurementError + (lambda_ * newSmoothnessError);
 
         if (newError < bestError) {
             bestError = newError;
         } else {
-            flipBlock(field, cx, cy, BLOCK_SIZE, rng);
+            flipBlock(field, cx, cy, blockSize_, rng);
         }
 
         if (iter % ERROR_DISPLAY_FREQUENCY == 0) std::cout << "Iteration: " << iter << " error: " << bestError << '\n';

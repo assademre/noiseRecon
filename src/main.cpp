@@ -1,7 +1,8 @@
 #include <iostream>
+#include <string>
+#include "config.h"
 #include "experiments/experimentRunner.h"
 #include "forward/projection.h"
-#include "config.h"
 
 
 int main() {
@@ -10,6 +11,8 @@ int main() {
         HEIGHT,
         sensors,
         noises,
+        lambdas,
+        blockSizes,
         TOTAL_ITERATIONS,
         SensorType::LOCALIZED
     );
