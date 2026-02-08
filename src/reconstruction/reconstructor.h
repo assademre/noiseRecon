@@ -5,7 +5,7 @@
 
 class Reconstructor {
     public:
-        Reconstructor(int itereations, double lambda, int blockSize);
+        Reconstructor(int iterations, double lambda, int blockSize);
 
         void reconstruct(Field2D& field, const Projection& projection, const std::vector<double>& measurement);
 

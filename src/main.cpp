@@ -1,7 +1,7 @@
 #include <iostream>
+#include "config.h"
 #include "experiments/experimentRunner.h"
 #include "forward/projection.h"
-#include "config.h"
 
 
 int main() {
