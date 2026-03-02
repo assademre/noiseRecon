@@ -9,7 +9,7 @@
 
 class ExperimentRunner {
     public:
-        static void runSingleExperiment(int width, int height,
+        static double runSingleExperiment(int width, int height,
                                         int numSensors,
                                         double noiseLevel,
                                         int iterations,

@@ -1,8 +1,10 @@
 #include "experimentRunner.h"
+#include <iomanip>
 #include <iostream>
+#include <fstream>
 #include "config.h"
 
-void ExperimentRunner::runSingleExperiment(int width, int height,
+double ExperimentRunner::runSingleExperiment(int width, int height,
                                         int numSensors,
                                         double noiseLevel,
                                         int iterations,
@@ -27,7 +29,7 @@ void ExperimentRunner::runSingleExperiment(int width, int height,
     //Reconstruct
     Field2D reconstructedField(width, height);
     Reconstructor reconstructor(iterations, lambda, blockSize);
-    reconstructor.reconstruct(reconstructedField, proj, measurements);
+    double finalError = reconstructor.reconstruct(reconstructedField, proj, measurements);
 
     //Saving results
     std::string comparisonFile = outputPref + "_comparison.ppm";
@@ -35,7 +37,21 @@ void ExperimentRunner::runSingleExperiment(int width, int height,
     //Visualize
     Visualizer::saveComparison(field, reconstructedField, comparisonFile);
 
+    //Error logging
+    std::ofstream errorLog("experiment_errors.csv", std::ios::app);
+    if (errorLog.is_open()) {
+        errorLog << numSensors << ',' 
+                 << noiseLevel << ','
+                 << lambda << ','
+                 << blockSize << ','
+                 << iterations << ','
+                 << finalError << '\n';
+        errorLog.close();
+    }
+
     std::cout << "Files saved \n"; 
+    return finalError;
+    
  }
 
  void ExperimentRunner::runMultipleExperiments(int width, int height,
@@ -46,6 +62,8 @@ void ExperimentRunner::runSingleExperiment(int width, int height,
                                             int iterations, 
                                             SensorType sensorType) {
 
+    struct Result { int sensor; double noise; int iterations; double lambda; int blockSize; double err; };
+    std::vector<Result> results;
     for (int sensor : sensorRange) {
         for (double noise : noiseRange) {
             for (double lambda : lambdas) {
@@ -55,11 +73,28 @@ void ExperimentRunner::runSingleExperiment(int width, int height,
                                              "_l" + std::to_string(static_cast<int>(lambda*100)) +
                                              "_b" + std::to_string(blockSize);                                        
 
-                    runSingleExperiment(width, height, sensor, noise, iterations, lambda, blockSize, outputPref, sensorType);
+                    double err = runSingleExperiment(width, height, sensor, noise, iterations, lambda, blockSize, outputPref, sensorType);
+                    results.push_back({sensor, noise, iterations, lambda, blockSize, err});
                 }
             }
         }
     }
 
-    std::cout << "Experiments completed\n";
+    std::cout << "Experiment summary:\n";
+    std::cout << std::setw(8) << "Sensors"
+              << std::setw(8) << "Noises"
+              << std::setw(8) << "Iteractions"
+              << std::setw(8) << "Lambda"
+              << std::setw(8) << "Block"
+              << std::setw(16) << "Final Error\n";
+    std::cout << std::string(46, '-') << '\n';
+
+    for (const auto& r : results) {
+        std::cout << std::setw(8) << r.sensor
+                  << std::setw(8) << r.noise
+                  << std::setw(8) << r.iterations
+                  << std::setw(8) << r.lambda
+                  << std::setw(8) << r.blockSize
+                  << std::setw(14) << std::fixed << std::setprecision(2) << r.err << '\n';
+    }
  }

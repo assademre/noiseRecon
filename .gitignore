@@ -11,6 +11,7 @@
 *.out
 *.bat
 *.ppm
+*.csv
 
 # User-specific files
 *.user
